@@ -8,3 +8,5 @@ Ayano will be guaranteed to have these features:
 - Private Voice Channels (Create a category, and a voice channel in that category, do some commands, and whenever a user joins the "lobby", they get automatically put into their own private voice channel, and can invite others into it. (also allows for roles to always join certain voice channels) )
 - Fun Commands
 - Custom Configuration for every server she's in.
+
+*Ayano will most likely also get an official website.*
