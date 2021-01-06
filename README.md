@@ -1,26 +1,26 @@
-# Ayano
+# Ayona
 
-Ayano is a discord bot, founded by [A1shi](https://github.com/chxcolate/).  She is a general purpose bot, but she tries to go above and beyond in everything she has to do.
+Ayona is a discord bot, founded by [A1shi](https://github.com/chxcolate/).  She is a general purpose bot, but she tries to go above and beyond in everything she has to do.
 
-Ayano will be guaranteed to have these features:
+Ayona will be guaranteed to have these features:
 
 - Moderation (automod, censoring, kick & ban, etc.)
 - Private Voice Channels (Create a category, and a voice channel in that category, do some commands, and whenever a user joins the "lobby", they get automatically put into their own private voice channel, and can invite others into it. (also allows for roles to always join certain voice channels) )
 - Fun Commands
 - Custom Configuration for every server she's in.
 
-*Ayano will most likely also get an official website.*
+*Ayona will most likely also get an official website.*
 
 
 ## Ideas:
 
-- Use Discord.JS in combination with either a library created by us or a library from someone else to code Ayano
+- Use Discord.JS in combination with either a library created by us or a library from someone else to code [botname]
 - Per-Server Configuration through the website
-- Getting a VPS in order to host Ayano 24/7
-- Getting a custom domain for Ayano's website (ayano.gg, ayano.sh, aya.no (taken, can contact owners), etc.)
+- Getting a VPS in order to host Ayona 24/7
+- Getting a custom domain for Ayona's website (ayona.gg, ayona.sh, ayo.na (favorite), etc.)
 - Website
   - Uses a web framework/library that delivers amazing stability, performance, and speed. (stability = not erroring out much, performance = how good it runs when loaded, speed = how fast can we download the website on a bad network)
-  - Is able to use custom routing (ayano.gg/configure/:guild)
+  - Is able to use custom routing (ayo.na/configure/:guild)
   - Uses a nice CSS Framework in order to deliver a beautiful website
   - Is a PWA
 - Bot
@@ -62,5 +62,5 @@ Ayano will be guaranteed to have these features:
 - Github Bot
   - After a certain amount of time, if the bot grows popular, we will add a github version containing:
   - A way to communicate with the discord bot (per-server)
-  - Configuration using the website (again, but this time "ayano.gg/configure/github/:repoOwner/:repoName")
+  - Configuration using the website (again, but this time "ayo.na/configure/github/:repoOwner/:repoName")
   - *More to come soon, will be decided if we reach close to this point.
