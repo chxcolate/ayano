@@ -18,22 +18,18 @@ const inversify_1 = require("inversify");
 const types_1 = require("./types");
 const message_responder_1 = require("./services/message-responder");
 let Ayona = class Ayona {
-    constructor(client, token, messageResponder) {
+    constructor(client, token, commandHandler) {
         this.client = client;
         this.token = token;
-        this.messageResponder = messageResponder;
+        this.commandHandler = commandHandler;
     }
     listen() {
         let client = new discord_js_1.Client();
+        let args = [];
         this.client.on('message', (msg) => {
             if (msg.author.bot)
                 return;
-            console.log("Message received! Contents: ", msg.content);
-            this.messageResponder.handle(msg).then(() => {
-                console.log('response sent!');
-            }).catch((error) => {
-                console.log('response not sent');
-            });
+            this.commandHandler.handle(msg, client);
         });
         return this.client.login(this.token);
     }
@@ -43,7 +39,7 @@ Ayona = __decorate([
     __param(0, inversify_1.inject(types_1.TYPES.Client)),
     __param(1, inversify_1.inject(types_1.TYPES.Token)),
     __param(2, inversify_1.inject(types_1.TYPES.MessageResponder)),
-    __metadata("design:paramtypes", [discord_js_1.Client, String, message_responder_1.MessageResponder])
+    __metadata("design:paramtypes", [discord_js_1.Client, String, message_responder_1.CommandHandler])
 ], Ayona);
 exports.Ayona = Ayona;
 //# sourceMappingURL=discord-bot.js.map

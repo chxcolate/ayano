@@ -1,22 +1,25 @@
-import {Message} from "discord.js";
-import {PingFinder} from "./ping-finder";
-import {inject, injectable} from "inversify";
-import {TYPES} from "../types";
+import {Client, Message} from "discord.js";
+import {injectable, multiInject} from "inversify";
+import {ICommand} from '../icommand'
+import {TYPES} from '../types'
 
 @injectable()
-export class MessageResponder {
-  private pingFinder: PingFinder;
+export class CommandHandler {
+  private commands: ICommand[]
 
   constructor(
-    @inject(TYPES.PingFinder) pingFinder: PingFinder
+    @multiInject(TYPES.ICommand) commands: ICommand[]
   ) {
-    this.pingFinder = pingFinder;
+    this.commands = commands;
   }
 
-  handle(message: Message): Promise<Message | Message[]> {
-    if (this.pingFinder.isPing(message.content)) {
-      return message.reply('pong!');
-    }
+  handle(message: Message, client: Client): Promise<Message | Message[]> {
+    this.commands.forEach(command => {
+      if(command.isMatch(message)) {
+        const args = message.content.slice(1).split(/ +/)
+        return command.execute(message, args, client)
+      }
+    });
 
     return Promise.reject();
   }

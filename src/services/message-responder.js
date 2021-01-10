@@ -12,25 +12,27 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MessageResponder = void 0;
-const ping_finder_1 = require("./ping-finder");
+exports.CommandHandler = void 0;
 const inversify_1 = require("inversify");
 const types_1 = require("../types");
-let MessageResponder = class MessageResponder {
-    constructor(pingFinder) {
-        this.pingFinder = pingFinder;
+let CommandHandler = class CommandHandler {
+    constructor(commands) {
+        this.commands = commands;
     }
-    handle(message) {
-        if (this.pingFinder.isPing(message.content)) {
-            return message.reply('pong!');
-        }
+    handle(message, client) {
+        this.commands.forEach(command => {
+            if (command.isMatch(message)) {
+                const args = message.content.slice(1).split(/ +/);
+                return command.execute(message, args, client);
+            }
+        });
         return Promise.reject();
     }
 };
-MessageResponder = __decorate([
+CommandHandler = __decorate([
     inversify_1.injectable(),
-    __param(0, inversify_1.inject(types_1.TYPES.PingFinder)),
-    __metadata("design:paramtypes", [ping_finder_1.PingFinder])
-], MessageResponder);
-exports.MessageResponder = MessageResponder;
+    __param(0, inversify_1.multiInject(types_1.TYPES.ICommand)),
+    __metadata("design:paramtypes", [Array])
+], CommandHandler);
+exports.CommandHandler = CommandHandler;
 //# sourceMappingURL=message-responder.js.map

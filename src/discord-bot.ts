@@ -1,36 +1,30 @@
 import {Client, Message} from 'discord.js'
 import {inject, injectable} from 'inversify'
 import {TYPES} from './types';
-import {MessageResponder} from './services/message-responder'
+import {CommandHandler} from './services/message-responder'
 
 @injectable()
 export class Ayona {
   private client: Client;
   private readonly token: string;
-  private messageResponder: MessageResponder
+  private commandHandler: CommandHandler
 
   constructor(
     @inject(TYPES.Client) client: Client,
     @inject(TYPES.Token) token: string,
-    @inject(TYPES.MessageResponder) messageResponder: MessageResponder
+    @inject(TYPES.MessageResponder) commandHandler: CommandHandler
   ) {
     this.client = client;
     this.token = token;
-    this.messageResponder = messageResponder;
+    this.commandHandler = commandHandler;
   }
 
   public listen(): Promise< string > {
     let client = new Client()
+    let args: string[] = []
     this.client.on('message', (msg: Message) => {
       if(msg.author.bot) return;
-
-      console.log("Message received! Contents: ", msg.content);
-
-      this.messageResponder.handle(msg).then(() => {
-        console.log('response sent!')
-      }).catch((error) => {
-        console.log('response not sent')
-      })
+      this.commandHandler.handle(msg, client)
     })
     return this.client.login(this.token)
   }
