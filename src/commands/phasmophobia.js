@@ -40,7 +40,6 @@ let Phasmophobia = class Phasmophobia {
             .setTitle("Phasmophobia Code!")
             .setAuthor(msg.author.username)
             .setDescription(`${msg.author} told me to post this Phasmophobia Code!`)
-            .addField('\u200b', '\u200b')
             .addField("Code", args[1]);
         msg.channel.send('@everyone');
         return msg.channel.send(phasmoEmbed);

@@ -1,6 +1,5 @@
 import { Message, Client, MessageEmbed } from "discord.js";
 import { injectable } from "inversify";
-import { isNumber } from "util";
 import { ICommand } from "../icommand";
 
 @injectable()
@@ -31,7 +30,6 @@ export class Phasmophobia implements ICommand {
     .setTitle("Phasmophobia Code!")
     .setAuthor(msg.author.username)
     .setDescription(`${msg.author} told me to post this Phasmophobia Code!`)
-    .addField('\u200b', '\u200b')
     .addField("Code", args[1])
     msg.channel.send('@everyone')
     return msg.channel.send(phasmoEmbed);
